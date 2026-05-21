@@ -1,120 +1,184 @@
-# Quick Start Guide - Central Limit Theorem Animation
+# Quick Start Guide - CLT Visualization
 
 ## 🚀 Get Started in 3 Steps
 
-### Step 1: Install Requirements (One-time setup)
-
+### Step 1: Install Dependencies
 ```bash
-pip install -r requirements.txt
+pip install manim scipy numpy
 ```
 
-### Step 2: Test with One Scene
-
+### Step 2: Test Installation
 ```bash
-manim -pql central_limit_theorem.py TitleScene
+manim -pql test_animation.py QuickTest
 ```
 
-This will open a window showing the animated title. If this works, you're ready!
+This should create a short test video (~10 seconds). If this works, you're ready!
 
-### Step 3: Render Complete Tutorial
-
+### Step 3: Render Full Animation
 ```bash
-manim -pqm central_limit_theorem.py TitleScene IntroductionScene DistributionTypesScene SamplingVisualization SampleMeansVisualization ConvergenceToNormal NormalDistributionExplanation CLTDefinitionScene CLTComponentsExplanation StandardErrorVisualization Example1Scene Example2Scene Example3Scene KeyTakeawaysScene ClosingScene
+# Preview version (fast, 480p)
+manim -pql clt_complete_visual.py CompleteCLTVisualization
+
+# Final version (slow, 1080p)
+manim -pqh clt_complete_visual.py CompleteCLTVisualization
 ```
 
-## 🎬 Most Useful Commands
+## 📍 Find Your Video
 
-### Preview One Scene (Fast, Low Quality)
-```bash
-manim -pql central_limit_theorem.py [SceneName]
+After rendering, your video will be at:
+```
+media/videos/clt_complete_visual/[quality]/CompleteCLTVisualization.mp4
 ```
 
-### High Quality Single Scene
+Quick find command:
 ```bash
-manim -pqh central_limit_theorem.py [SceneName]
+find . -name "CompleteCLTVisualization.mp4" -mmin -5
 ```
 
-### Save Without Preview
+## ⚡ Useful Commands
+
+### Test Individual Sections (much faster!)
 ```bash
-manim -qm central_limit_theorem.py [SceneName]
+# Test Galton board (~30 seconds)
+manim -pql test_animation.py TestGaltonBoard
+
+# Test convergence (~45 seconds)
+manim -pql test_animation.py TestConvergence
+
+# Test example problem (~20 seconds)
+manim -pql test_animation.py TestExample
 ```
 
-## 📋 Scene Names Cheat Sheet
+### Quality Options
+| Command | Quality | Time | Use For |
+|---------|---------|------|---------|
+| `-ql` | 480p | Fast | Testing |
+| `-qm` | 720p | Medium | Review |
+| `-qh` | 1080p | Slow | YouTube |
+| `-qk` | 4K | Very Slow | Professional |
 
-Copy and paste these scene names:
+## 🎬 What You'll See
 
-**Basics:**
-- `TitleScene`
-- `IntroductionScene`
-- `DistributionTypesScene`
+1. **Title** - "CENTRAL LIMIT THEOREM"
+2. **4 Distributions** - Different non-normal shapes
+3. **Galton Board** - 50 balls creating a bell curve
+4. **Sampling** - Visual demonstration of taking samples
+5. **Convergence** - Histograms for n=2,5,10,30
+6. **Math** - The CLT formula explained
+7. **Example** - Real manufacturing problem
+8. **Conclusion** - Key takeaways
 
-**Core Concepts:**
-- `SamplingVisualization`
-- `SampleMeansVisualization`
-- `ConvergenceToNormal`
+**Total Duration:** 8-12 minutes
 
-**Theory:**
-- `NormalDistributionExplanation`
-- `CLTDefinitionScene`
-- `CLTComponentsExplanation`
-- `StandardErrorVisualization`
+## 🎨 Colors Used
 
-**Examples:**
-- `Example1Scene` (Manufacturing)
-- `Example2Scene` (Test Scores)
-- `Example3Scene` (Delivery Times)
+All text is **bright and clear** (no blur):
+- Pink - Titles
+- Blue - Math formulas
+- Green - Correct answers
+- Yellow - Questions
+- White - Regular text
 
-**Wrap-up:**
-- `KeyTakeawaysScene`
-- `ClosingScene`
+## 🐛 Troubleshooting
 
-## 🎯 Recommended Teaching Order
-
-### For 1-Hour Lecture:
+### "Command not found: manim"
 ```bash
-# Introduction (5 min)
-manim -pqm central_limit_theorem.py TitleScene IntroductionScene
-
-# Visual Examples (10 min)
-manim -pqm central_limit_theorem.py DistributionTypesScene ConvergenceToNormal
-
-# Theory (15 min)
-manim -pqm central_limit_theorem.py CLTDefinitionScene CLTComponentsExplanation
-
-# Examples (25 min)
-manim -pqm central_limit_theorem.py Example1Scene Example2Scene Example3Scene
-
-# Summary (5 min)
-manim -pqm central_limit_theorem.py KeyTakeawaysScene
+pip install manim
+# OR
+pip install --user manim
 ```
 
-### For Self-Study:
-Watch all 15 scenes in sequence. Pause after examples to try solving before seeing the solution.
+### Rendering is too slow
+Use `-ql` instead of `-qh` for testing:
+```bash
+manim -pql clt_complete_visual.py CompleteCLTVisualization
+```
 
-## ⚡ Tips
+### Text looks blurry
+- Make sure you're using the new file: `clt_complete_visual.py`
+- Render at higher quality: use `-qh` or `-qk`
+- The old file `central_limit_theorem.py` has blur effects
 
-- **First time?** Start with `TitleScene` to verify everything works
-- **Developing?** Use `-ql` (low quality) for fast previews
-- **Teaching?** Use `-qm` (medium quality) - good balance of quality and file size
-- **Recording?** Use `-qh` (high quality) for YouTube or professional use
+### Video doesn't open automatically
+Remove the `-p` flag:
+```bash
+manim -qh clt_complete_visual.py CompleteCLTVisualization
+```
+Then manually open from `media/videos/` folder
 
-## 🔥 Common Issues & Quick Fixes
+## 💡 Pro Tips
 
-**"Command not found"**
-→ Run: `pip install manim`
+### Speed Up Testing
+1. Test individual sections first (see commands above)
+2. Use `-ql` for all testing
+3. Only use `-qh` for final render
 
-**"LaTeX error"**
-→ Install LaTeX: 
-- Windows: MiKTeX
-- Mac: MacTeX  
-- Linux: `sudo apt install texlive-full`
+### Customize
+Edit `clt_complete_visual.py`:
+- Line 15-21: Change colors
+- Search for `self.wait(X)`: Change timing
+- Line 414: Change sample sizes `[2, 5, 10, 30]`
 
-**"Too slow"**
-→ Use `-ql` instead of `-qh`
+### Export for Different Platforms
 
-**"Can't find scene"**
-→ Check spelling - scene names are case-sensitive!
+**YouTube (1080p)**
+```bash
+manim -pqh clt_complete_visual.py CompleteCLTVisualization
+```
+
+**Instagram/TikTok (720p)**
+```bash
+manim -pqm clt_complete_visual.py CompleteCLTVisualization
+```
+
+**Conference (4K)**
+```bash
+manim -pqk clt_complete_visual.py CompleteCLTVisualization
+```
+
+## 📚 Next Steps
+
+1. ✅ Render preview with `-ql`
+2. ✅ Watch and review
+3. ✅ Make any desired changes
+4. ✅ Render final with `-qh`
+5. ✅ Share your video!
+
+## 🆘 Need Help?
+
+- **Documentation:** See `README_CLT_VISUAL.md`
+- **Commands:** See `COMMANDS.md`
+- **Overview:** See `SUMMARY.md`
+- **Manim docs:** https://docs.manim.community/
+
+## 🎯 Expected Output
+
+After running successfully, you should have:
+- ✅ A video file (MP4 format)
+- ✅ Duration: 8-12 minutes
+- ✅ Clear, readable text throughout
+- ✅ Smooth animations
+- ✅ Bright colors on black background
+
+## ⏱️ Approximate Render Times
+
+**Low Quality (-ql):**
+- Full animation: 2-3 minutes
+- Individual sections: 10-30 seconds
+
+**High Quality (-qh):**
+- Full animation: 10-15 minutes
+- Individual sections: 1-3 minutes
+
+**4K Quality (-qk):**
+- Full animation: 30-45 minutes
+- Individual sections: 3-8 minutes
 
 ---
 
-**Need more help?** See the full README_CLT.md
+**Ready? Run this now:**
+```bash
+manim -pql test_animation.py QuickTest
+```
+
+If you see a green "✓ All Tests Passed!" message, you're all set! 🎉
